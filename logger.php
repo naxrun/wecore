@@ -15,7 +15,7 @@ $db_con->set_charset("utf8");
 
 // Post data
 $visitor_ip			= $_POST['v_ip'];
-$visitor_refferer	= $_POST['v_ref'];
+$visitor_referer	= $_POST['v_ref'];
 $visitor_unique_id	= $_POST['v_uid'];
 $page_category		= $_POST['p_cat'];
 $page_url			= $_POST['p_url'];
@@ -27,8 +27,9 @@ if(isset($visitor_ip) && !empty($visitor_ip) && !filter_var($visitor_ip, FILTER_
 	$todb_visitor_ip		= NULL;
 }
 
-if(isset($visitor_refferer) && !empty($visitor_refferer)) {
-	$todb_visitor_refferer	= $visitor_refferer;
+if(isset($visitor_referer) && !empty($visitor_referer)) {
+	$visitor_referer		= protocolRemoval($visitor_referer);
+	$todb_visitor_referer	= $visitor_referer;
 } else {
 	$todb_visitor_refferer	= NULL;
 }
@@ -46,6 +47,7 @@ if(isset($page_category) && !empty($page_category) && !filter_var($page_category
 }
 
 if(isset($page_url) && !empty($page_url)) {
+	$page_url				= protocolRemoval($page_url);
 	$todb_page_url			= $page_url;
 } else {
 	$todb_page_url			= NULL;

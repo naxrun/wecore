@@ -12,6 +12,15 @@ function &createDatabaseConnection() {
 	return($mysqli);
 }
 
+// Sanitizing
+function protocolRemoval($url) {
+
+	$url	= str_replace('https://', '', $url);
+	$url	= str_replace('http://', '', $url);
+	
+	return $url;
+}
+
 // Responses
 function &createResponse() {
 	$response = array('code' => 501 /*501 -> Not Implemented*/, 'data' => array(), 'errors' => array());
