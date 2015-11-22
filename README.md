@@ -2,7 +2,7 @@
 
 Naxrun's Website Content Recommendation engine is free for anyone to use. We have developed it as a proof of concept, that illustrates how a website can display the most relevant content, based on a visitor's previous activity.
 
-The only thing needed to run this is PHP 5.6 and MySQL 5.5.
+The current version is v0.1 beta.
 
 ### How it works
 
@@ -18,14 +18,18 @@ The logger.php script is used to log every site interaction a site visitor has. 
 * p_cat - Page category ID, which must be an integer
 * p_url - Page URL
 
-The logger.php script logs all these values in a MySQL database.
+The logger.php script logs all these values in a MySQL database. All parameter values are submitted using POST.
+
+The script will return a JSON element with info about the inserted data and a HTTP status code. Please note, that providing no input will cause the script to insert NULL values for everything, except 'p_cat', which will be set to '1'.
 
 The other script - recommendation.php - provides a page category ID recommendation, based on either the visitor's IP address or the unique ID attached to the visitor. The script takes these parameters:
 
 * v_ip - The visitor's IP address (only IPv4 supported)
 * v_uid - Any unique visitor ID - eg. a fingerprint or ID stored in a cookie
 
-All values are submitted using POST.
+All parameter values are submitted using POST.
+
+The script will return a JSON element with recommendations based on the visitor's IP and/or unique ID, and a HTTP status code.
 
 ### Setup
 The only thing needed to run this is PHP 5.6 and MySQL 5.5.
